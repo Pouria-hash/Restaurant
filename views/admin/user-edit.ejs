@@ -1,0 +1,31 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-md-6  p-2 offset-md-3 ">
+                <h2 class="">Edit user profile : <%= user.username %>
+                </h2>
+                <form action="/admin/users/<%= user._id %>/edit?_method=PUT" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label ">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                            value="<%= user.username %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label ">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Email"
+                            value="<%= user.email %>">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="isAdmin" name="isAdmin"
+                            value=<%=!user.isAdmin %>
+                        <%= user.isAdmin && 'checked' %> >
+                            <label class="form-check-label" for="isAdmin">Checked switch Admin</label>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

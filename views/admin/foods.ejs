@@ -1,0 +1,62 @@
+<% layout('./layouts/boilerplate') %>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col">
+                <div class="d-flex my-3">
+                    <h2>All Users</h2>
+                    <a href="/admin/foods/new" class="btn btn-dark ms-auto">Create New</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered   table-hover table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>ROW</th>
+                                <th>FOOD ID</th>
+                                <th>NAME</th>
+                                <th>CATEGORY</th>
+                                <th>PRICE</th>
+                                <th>STOCK</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let food of foods) {%>
+                                <tr class='align-middle'>
+                                    <td>
+                                        <%= foods.indexOf(food)+1 %>
+                                    </td>
+                                    <td>
+                                        <%= food._id %>
+                                    </td>
+                                    <td>
+                                        <%= food.name %>
+                                    </td>
+                                    <td>
+                                        <%= food.category %>
+                                    </td>
+                                    <td>
+                                        <%= food.price %>
+                                    </td>
+                                    <td>
+                                        <%= food.inStock %>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm"
+                                            href="/admin/foods/<%= food._id %>/edit">Edit</a>
+                                        <form class="d-inline" action="/admin/foods/<%= food._id %>?_method=DELETE"
+                                            method="POST">
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% } %>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>

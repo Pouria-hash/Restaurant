@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">E-Restaurant</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+                <a class="nav-link" href="/foods">Foods</a>
+                <a class="nav-link" href="/foods/menu">Menu</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if(!currentUser) {%>
+                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/login">Login</a>
+                    <% }else{ %>
+                        <% if(currentUser && currentUser.isAdmin) {%>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="/admin/users">Users</a></li>
+                                    <li><a class="dropdown-item" href="/admin/foods">Foods</a></li>
+                                    <li><a class="dropdown-item" href="/admin/orders">Orders</a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                                <a class="nav-link" href="/logout">Logout</a>
+                                <a class="nav-link" href="/profile">
+                                    <%= currentUser.username %>
+                                </a>
+                                <% } %>
+
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,71 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-md-3   ms-1 p-2 ">
+                <h2 class="">HI <%= currentUser.username.toUpperCase() %>
+                </h2>
+                <form action="/profile" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label ">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                            value="<%= currentUser.username %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label ">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Email"
+                            value="<%= currentUser.email %>">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+                <h3>Orders</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered   table-hover table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>ROW</th>
+                                <th>ORDER ID</th>
+                                <th>DATE</th>
+                                <th>TOTAL</th>
+                                <th>PAID</th>
+                                <th>DELIVERED</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let order of orders) {%>
+                                <tr class='align-middle'>
+                                    <td>
+                                        <%= orders.indexOf(order)+1 %>
+                                    </td>
+                                    <td>
+                                        <%= order._id %>
+                                    </td>
+                                    <td>
+                                        <%= order.createdAt %>
+                                    </td>
+                                    <td>
+                                        <%= order.totalPrice %>
+                                    </td>
+                                    <td>
+                                        <%= order.isPaid %>
+                                    </td>
+                                    <td>
+                                        <%= order.isDelivered %>
+                                    </td>
+                                    <td><a class="btn btn-light btn-sm" href="/order/<%= order._id %>">Details</a></td>
+                                </tr>
+                                <% } %>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

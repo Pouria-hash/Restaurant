@@ -1,0 +1,78 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="<%= food.image %> " alt="<%= food.name %> " class="img-fluid">
+            </div>
+            <div class="col-md-5">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h3>
+                            <%= food.name %>
+                        </h3>
+                    </li>
+
+                    <li class="list-group-item">
+                        <p>Price: $<%= food.price %>
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>
+                            <%= food.description %>
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6">Price:</div>
+                                <div class="col-6">
+                                    $<%= food.price %>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6">Status:</div>
+                                <div class="col-6">
+                                    <%= food.qty %>
+                                </div>
+                            </div>
+                        </li>
+                        <form action="">
+                            <li class="list-group-item">
+
+                                <div class="row">
+                                    <div class="col-6">QTY:</div>
+                                    <div class="col-4">
+                                        <% if(food.qty===0 ) {%>
+                                            <p>out of stock</p>
+                                            <% }else{ %>
+                                                <select name="qty" id="qty" class="form-select">
+                                                    <% for(let i=1; i<=food.qty ; i++) {%>
+                                                        <option value="<%= i %>">
+                                                            <%= i %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="col-8 d-grid offset-2">
+                                    <button class="btn btn-primary" <%=food.qty===0 ?'disabled': '' %> %> >Add To
+                                        Card</button>
+                                </div>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+    </div>

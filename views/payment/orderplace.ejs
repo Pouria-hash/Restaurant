@@ -1,0 +1,103 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="border-bottom mb-3">
+                    <h3>Shipping Address</h3>
+                    <p><strong>Address: </strong>
+                        <%= cart.shipping.address %> ,
+                            <%= cart.shipping.city %> ,
+                                <%= cart.shipping.postalCode %> ,
+                                    <%= cart.shipping.state %>
+
+                    </p>
+                </div>
+                <div class="border-bottom mb-3">
+                    <h3>Payment Method</h3>
+                    <p><strong>Method: </strong>
+                        <%= cart.paymentMethod %>
+                    </p>
+                </div>
+                <div>
+                    <h3>Order Items</h3>
+                    <% for(let item of cart.items) { %>
+                        <div class="row mb-1">
+                            <div class="col-2">
+                                <img src="<%= item.foodId.image %> " class="img-fluid rounded order-item-image"
+                                    alt="<%= item.foodId.name %> ">
+                            </div>
+                            <div class="col-6">
+                                <p><a href="/foods/<%= item.foodId._id %>">
+                                        <%= item.foodId.name %>
+                                    </a></p>
+                            </div>
+                            <div class="col-4">
+                                <p>
+                                    <%= item.qty %> *
+                                        $<%= item.foodId.price %> =
+                                            $<%= cart.items.reduce((acc , item)=> acc + item.foodId.price*item.qty ,0)%>
+                                </p>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+            <div class="col-md-4  list-group list-group-flush">
+                <h5 class="text-center list-group-item fw-light m-0 py-2">Order Summery</h5>
+
+
+                <div class="row d-flex list-group-item justify-content-between ">
+                    <div class="col-3">
+                        Items:
+                    </div>
+                    <div class="col-3 text-end" id="items">
+                        $ <%= cart.items.reduce((acc , item)=> acc + item.foodId.price*item.qty ,0)%>
+                    </div>
+                </div>
+                <div class="row d-flex list-group-item justify-content-between ">
+                    <div class="col-3">
+                        Shipping:
+                    </div>
+                    <div class="col-3 text-end" id="shipping"></div>
+                </div>
+                <div class="row d-flex justify-content-between list-group-item ">
+                    <div class="col-3">
+                        Total:
+                    </div>
+                    <div class="col-3 text-end" id="total"></div>
+                </div>
+
+                <div class="list-group-item">
+                    <form action="/order" method="POST" class="d-grid">
+                        <button class="btn btn-primary">ORDER NOW</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+    <script>
+        const items = document.querySelector('#items')
+        const numItems = parseInt(items.innerText.slice(1))
+        const shipping = document.querySelector('#shipping')
+        const total = document.querySelector('#total')
+        let numShipping = 0
+        if (numItems > 100) {
+            numShipping = 0
+            shipping.innerText = `$ ${numShipping}`;
+            const numTotal = Number(numShipping) + Number(numItems);
+            total.innerText = `$ ${numTotal}`
+        } else {
+            numShipping = 10
+            shipping.innerText = `$ ${numShipping}`;
+            const numTotal = Number(numShipping) + Number(numItems);
+            total.innerText = `$ ${numTotal}`
+        }
+
+    </script>

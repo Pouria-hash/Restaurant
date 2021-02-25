@@ -1,0 +1,36 @@
+a{
+    text-decoration:none;
+    
+}
+
+
+
+.menu-items{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+}
+
+.menu-items-image{
+min-height: 100%;
+height: 100px;
+width: 100%;
+object-fit: cover;
+border-radius: 5px;
+}
+
+.order-item-image{
+    width: 100%;    
+    height: 50px;
+    object-fit: cover;
+}
+
+#menuItem:hover{
+    background-color: #e9edc9;
+    border-radius: 1em;
+}
+
+#menuItem:active{
+    background-color: #dce0b9;
+    border-radius: 1em;
+}

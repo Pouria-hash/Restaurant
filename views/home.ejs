@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body class="container-fluid d-flex flex-column">
+    <header class="d-flex flex-column" id="header">
+        <div>
+            <nav class="navbar navbar-expand-md navbar-light  sticky-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">E-Restaurant</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link" href="/foods">Foods</a>
+                            <a class="nav-link" href="/foods/menu">Menu</a>
+                        </div>
+                        <div class="navbar-nav ms-auto">
+                            <% if(!currentUser) {%>
+                                <a class="nav-link" href="/register">Register</a>
+                                <a class="nav-link" href="/login">Login</a>
+                                <% }else{ %>
+                                    <% if(currentUser && currentUser.isAdmin) {%>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Admin
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item" href="/admin/users">Users</a></li>
+                                                <li><a class="dropdown-item" href="/admin/foods">Foods</a></li>
+                                                <li><a class="dropdown-item" href="/admin/orders">Orders</a></li>
+                                            </ul>
+                                        </li>
+                                        <% } %>
+                                            <a class="nav-link" href="/logout">Logout</a>
+                                            <a class="nav-link" href="/profile">
+                                                <%= currentUser.username %>
+                                            </a>
+                                            <% } %>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="row d-flex justify-content-center text-center" id="header-image">
+            <div class="col-md-5 d-flex flex-column lh-lg" id="header-content">
+                <h5 class="fs-4 fw-light">WELCOME</h5>
+                <h1 class="fw-light">E-RESTAURANT</h1>
+                <p>Our master chefs serve the most delicious food from all over the world.</p>
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-md-8">
+                        <a href="/foods" class="btn">ORDER NOW</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </header>
+    <main class="container">
+        <div id="row">
+            <div class="col-md-8 offset-md-2" id="story">
+                <h3 class="text-center">Discover Our Story</h3>
+                <p class="text-center fw-light">In the 1950s, all that stood in this iconic location was a car park with
+                    a small
+                    kiosk. Even then it
+                    was the best spot for uninterrupted panoramic views of Adelaide, with the address a tourist
+                    destination in itself. In October 1985, RavoRes as we know it today opened.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum lectus ut ligula fringilla, eu
+                    euismod turpis pulvinar. Vestibulum eget urna ac dolor consequat aliquam.</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly mb-3">
+            <div class="col-md-5 story-image mb-3">
+                <img src="https://images.unsplash.com/photo-1589187151053-5ec8818e661b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDB8fHBpenphfGVufDB8fDB8&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid rounded story-image" alt="pizza">
+            </div>
+            <div class="col-md-5 story-image">
+                <img src="https://images.unsplash.com/photo-1580372648129-cb82ef5f1052?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjB8fGJ1cmdlcnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid rounded story-image" alt="pizza">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly mb-3">
+            <div class="col-md-5 story-image mb-3 order-2 order-md-1">
+                <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OHx8cGFzdGF8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid rounded story-image" alt="pizza">
+            </div>
+            <div class="col-md-5 d-flex order-1 order-md-2 flex-column story-image justify-content-center">
+                <h2>Opening Hours</h2>
+                <h4>Saturday - thursday: 12pm - 10pm</h4>
+                <h4>Friday: 11am - 11pm</h4>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly mb-3">
+            <div class="col-md-5 story-image mb-3">
+                <img src="https://images.unsplash.com/photo-1612548041047-6309de6a3534?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fGl0YWxpYW4lMjBmb29kfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid rounded story-image" alt="pizza">
+            </div>
+            <div class="col-md-5 story-image">
+                <img src="https://images.unsplash.com/photo-1605082287613-03c255be2561?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzl8fGl0YWxpYW4lMjBmb29kfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid rounded story-image" alt="pizza">
+            </div>
+        </div>
+    </main>
+    <footer class="text-center  pb-5">
+        <h4 class="fw-light">Taste our delicious food</h4>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

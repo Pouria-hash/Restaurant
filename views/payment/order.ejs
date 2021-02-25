@@ -1,0 +1,117 @@
+<% layout("./layouts/boilerplate") %>
+
+    <div class="container">
+        <h2>
+            ORDER ID: <%= order._id %>
+        </h2>
+        <div class="row">
+            <div class="col-md-8 list-group list-group-flush ">
+                <div class="list-group-item mb-3">
+                    <h3 class="fw-light">Shipping Address</h3>
+                    <p><strong>Address: </strong>
+                        <%= order.shippingAddress.address %> ,
+                            <%= order.shippingAddress.city %> ,
+                                <%= order.shippingAddress.postalCode %> ,
+                                    <%= order.shippingAddress.state %>
+
+                    </p>
+                    <% if(!order.isDelivered) {%>
+                        <div class="alert alert-danger" role="alert">
+                            order is not delivered.
+                        </div>
+                        <% }else{ %>
+                            <div class="alert alert-success" role="alert">
+                                order is delivered at <%= order.deliveredAt %>
+                            </div>
+                            <% } %>
+                </div>
+                <div class="list-group-item mb-3">
+                    <h3 class="fw-light">Payment Method</h3>
+                    <p><strong>Method: </strong>
+                        <%= order.paymentMethod %>
+                    </p>
+                    <% if(!order.isPaid) {%>
+                        <div class="alert alert-danger" role="alert">
+                            order is not paid.
+                        </div>
+                        <% }else{ %>
+                            <div class="alert alert-success" role="alert">
+                                order is paid at <%= order.paidAt %>
+                            </div>
+                            <% } %>
+                </div>
+                <div class="list-group-item mb-3">
+                    <h3 class="fw-light">Order Items</h3>
+                    <% for(let item of order.orderItems) { %>
+                        <div class="row p-1">
+                            <div class="col-2">
+                                <img src="<%= item.foodId.image %> " class="img-fluid rounded order-item-image"
+                                    alt="<%= item.foodId.name %> ">
+                            </div>
+                            <div class="col-6">
+                                <p><a href="/foods/<%= item.foodId._id %>">
+                                        <%= item.foodId.name %>
+                                    </a></p>
+                            </div>
+                            <div class="col-4">
+                                <p>
+                                    <%= item.qty %> *
+                                        $<%= item.foodId.price %> =
+                                            $<%= order.orderItems.reduce((acc , item)=> acc +
+                                                item.foodId.price*item.qty,0)%>
+                                </p>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+            <div class="col-md-4  list-group list-group-flush">
+                <h5 class="text-center list-group-item fw-light m-0 py-2">Order Summery</h5>
+
+
+                <div class="row d-flex list-group-item justify-content-between ">
+                    <div class="col-3">
+                        Items:
+                    </div>
+                    <div class="col-3 text-end" id="items">
+                        $ <%= order.orderItems.reduce((acc , item)=> acc + item.foodId.price*item.qty ,0)%>
+                    </div>
+                </div>
+                <div class="row d-flex list-group-item justify-content-between ">
+                    <div class="col-3">
+                        Shipping:
+                    </div>
+                    <div class="col-3 text-end" id="shipping">
+                        $ <%= order.shippingPrice %>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-between list-group-item ">
+                    <div class="col-3">
+                        Total:
+                    </div>
+                    <div class="col-3 text-end" id="total">
+                        $ <%= order.totalPrice %>
+                    </div>
+                </div>
+                <% if(!order.isPaid) {%>
+                    <div class="list-group-item d-grid">
+                        <button class="btn btn-primary" data-order-id=<%=order._id %>
+                            id="checkout-button">Checkout</button>
+                        <script src="https://js.stripe.com/v3/"></script>
+                    </div>
+                    <% } %>
+                        <% if(order.isPaid && !order.isDelivered) {%>
+                            <div class="list-group-item">
+                                <form action="/admin/orders/<%= order._id %>/delivered?_method=PUT" method="POST"
+                                    class="d-grid">
+                                    <button class="btn btn-primary">Delivered</button>
+                                </form>
+                            </div>
+                            <% } %>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/js/stripe.js"></script>
+    <script src="https://js.stripe.com/terminal/v1/"></script>

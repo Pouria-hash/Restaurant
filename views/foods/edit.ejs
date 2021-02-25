@@ -1,0 +1,45 @@
+<% layout('./layouts/boilerplate') %>
+
+    <div class="row d-flex justify-content-center align-items-center my-3">
+        <div class="col-md-6">
+            <h1>Edit Food</h1>
+            <form action="/admin/foods/<%= food._id %>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="category" class="form-control" id="category">
+                        <option value="<%= food.category %> ">
+                            <%= food.category.toUpperCase() %>
+                        </option>
+                        <option value="food">Food</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Name of Food" class="form-control"
+                        value="<%= food.name %> " required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input type="text" name="image" id="image" placeholder="Image Url" class="form-control"
+                        value="<%= food.image %> " required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="price" id="price" placeholder="Price" class="form-control"
+                        value=<%=food.price %> required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="qty" class="form-label">left over</label>
+                    <input type="number" name="qty" id="qty" placeholder="QTY" class="form-control" value=<%=food.qty %>
+                    required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="" cols="30" rows="10"
+                        class="form-control"><%= food.description %></textarea>
+                </div>
+                <button class="btn btn-primary mt-3">Update</button>
+            </form>
+        </div>
+    </div>
